@@ -1,0 +1,2 @@
+export const SET_FOO_REQUEST = 'SET_FOO_REQUEST'
+export const SET_FOO_SUCCESS = 'SET_FOO_SUCCESS'

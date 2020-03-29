@@ -1,68 +1,111 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 리액트와 파이어베이스
 
-## Available Scripts
+## Step 1. 폴더 구조 세팅
 
-In the project directory, you can run:
+1. 불필요한 파일들 제거
+   - cra로 프로젝트 생성 후 불필요한 파일들 제거 (.css, setup, serviceWorker 등등)
+2. React Router
 
-### `yarn start`
+   - react-router-dom 설치
+     ```
+     $ npm install react-router-dom
+     ```
+   - react-router-dom 세팅
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+     ```js
+     import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+         <Router>
+            <App />
+         </Router>
 
-### `yarn test`
+         <nav>
+            <ul>
+                <li>
+                <Link to="/">Home</Link>
+                </li>
+                <li>
+                <Link to="/about">About</Link>
+                </li>
+            </ul>
+         </nav>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+         <Switch>
+             <Route path="/">
+                 <Home/>
+             </Route>
+             <Route path="/about">
+                 <About/>
+             </Route>
+         </Switch>
+     ```
 
-### `yarn build`
+3. Redux & Redux Saga
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   - react-redux, redux, redux-saga 설치
+     ```
+     npm install react-redux redux redux-saga
+     ```
+   - `Provider`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+     ```js
+     import { Provider } from 'react-redux'
+     ;<Provider store={store}>
+       <App />
+     </Provider>
+     ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   - `store`
+     > store - index.js 참고
+   - `reducer`
+     - ducks 패턴 활용 (actions, reducer, types를 하나의 모듈로 관리)
+     - store - modules - sample 참고
+   - `saga`
 
-### `yarn eject`
+     - saga 등록
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+       ```js
+       import createSagaMiddleware from 'redux-saga'
+       import rootSaga from './saga'
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+       // sagaMiddleware 를 applyMiddleware에 등록
+       const sagaMiddleware = createSagaMiddleware()
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+       sagaMiddleware.run(rootSaga)
+       ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+     - sample saga 생성
+       > sagas - sample 참고 (깊게 아는 것도 좋은데, 패턴 정도로 숙지하고 있어도 개발에 문제 없음)
 
-## Learn More
+4) 폴더 세팅
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `components` : 화면에 보여지는 것들
+- `container` : 서비스 로직 & 리덕스 스토러에 접근하는 것들
+- `helpers` : 유틸리티
+- `hooks` : 커스텀 훅
+- `sagas` : 사가
+- `state` : 상태관리
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+5. prettier 세팅
 
-### Code Splitting
+   ```json
+   {
+     "tabWidth": 2,
+     "useTabs": false,
+     "semi": false,
+     "singleQuote": true,
+     "printWidth": 120
+   }
+   ```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+6. antd 세팅
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+   - antd 설치
+     ```
+     $ npm install antd
+     ```
+   - andt 세팅
+     ```js
+     import 'antd/dist/antd.css'
+     import { DatePicker } from 'antd'
+     ```
