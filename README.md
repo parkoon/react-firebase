@@ -109,3 +109,32 @@
      import 'antd/dist/antd.css'
      import { DatePicker } from 'antd'
      ```
+
+## Step 2. 배포
+
+firebase 공식 홈페이지 참고!
+
+1. Firebase 에서 프로젝트 생성
+2. firebase tool 설치
+   ```
+   $ sudo npm install -g firebase-tools
+   ```
+3. Init
+   ```
+   $ firebase login
+   $ firebase init
+   ```
+   - Hosting: Configure and deploy Firebase Hosting sites 선택
+   - What do you wnat to use as your public directory ? build
+4. 프로젝트 빌드
+   ```
+   $ npm run build
+   ```
+5. 배포
+   ```
+   $ firebase deploy
+   ```
+6. script로 배포 쉽게 하기 (package.json)
+   ```
+   firebase-deploy: "npm run build && firebase deploy"
+   ```
