@@ -98,17 +98,8 @@
    }
    ```
 
-6. antd 세팅
-
-   - antd 설치
-     ```
-     $ npm install antd
-     ```
-   - andt 세팅
-     ```js
-     import 'antd/dist/antd.css'
-     import { DatePicker } from 'antd'
-     ```
+6. Material-ui 설치
+   > https://material-ui.com/getting-started/installation/ 참고
 
 ## Step 2. 배포
 
@@ -138,3 +129,5 @@ firebase 공식 홈페이지 참고!
    ```
    firebase-deploy: "npm run build && firebase deploy"
    ```
+
+## Step 3. Material UI Toolbar 만들기
